@@ -10,6 +10,6 @@ class DIAsProxyPrototype extends ProxyReference
      */
     public function get(DIContainer $container)
     {
-        return $this->createInstance();
+        return $this->createInstance($container);
     }
 }

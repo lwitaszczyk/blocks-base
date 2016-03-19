@@ -26,7 +26,7 @@ class DIAsProxySingleton extends ProxyReference
     public function get(DIContainer $container)
     {
         if (is_null($this->instance)) {
-            $this->instance = $this->createInstance();
+            $this->instance = $this->createInstance($container);
         }
         return $this->instance;
     }
