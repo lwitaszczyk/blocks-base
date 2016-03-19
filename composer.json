@@ -1,0 +1,29 @@
+{
+    "name": "blocks/base",
+    "type": "library",
+    "description": "Blocks - Base",
+    "require": {
+        "php": ">=5.5.0",
+        "psr/log": "^1.0",
+        "ocramius/proxy-manager": "1.0.*"
+    },
+    "authors": [
+        {
+            "name": "Lukasz Witaszczyk",
+            "email": "Lukasz.Witaszczyk@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpspec/phpspec": "2.2.*",
+        "squizlabs/php_codesniffer": "^2.5",
+        "fabpot/php-cs-fixer": "^1.10"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "src"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
