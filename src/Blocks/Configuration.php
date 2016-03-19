@@ -19,4 +19,11 @@ interface Configuration
      * @return $this
      */
     public function set($key, $value);
+
+    /**
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function has($key);
 }

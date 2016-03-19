@@ -60,4 +60,26 @@ class YmlConfiguration implements Configuration
     {
         // TODO: Implement set() method.
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function has($key)
+    {
+        $value = $this->config;
+
+        $keys = explode('.', $key);
+        $key = reset($keys);
+
+        do {
+            if (array_key_exists($key, $value)) {
+                $value = $value[$key];
+            } else {
+                return false;
+            }
+            $key = next($keys);
+        } while ($key !== false);
+
+        return true;
+    }
 }
