@@ -1,5 +1,5 @@
 {
-    "name": "blocks/base",
+    "name": "lwitaszczyk/blocks/base",
     "type": "library",
     "description": "Blocks - Base",
     "require": {
