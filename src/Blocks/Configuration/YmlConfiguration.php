@@ -58,7 +58,18 @@ class YmlConfiguration implements Configuration
      */
     public function set($key, $value)
     {
-        // TODO: Implement set() method.
+        $keys = explode('.', $key);
+
+        $temp = &$this->config;
+        foreach($keys as $key) {
+            $temp = &$temp[$key];
+        }
+
+        $temp = $value;
+
+        unset($temp);
+
+        return $this;
     }
 
     /**

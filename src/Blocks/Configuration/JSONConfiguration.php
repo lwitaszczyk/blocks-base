@@ -50,7 +50,6 @@ class JSONConfiguration implements Configuration
             $currentKey = next($keys);
         } while ($currentKey !== false);
 
-//        var_dump($key, $value);
         return $value;
     }
 
@@ -59,7 +58,18 @@ class JSONConfiguration implements Configuration
      */
     public function set($key, $value)
     {
-        // TODO: Implement set() method.
+        $keys = explode('.', $key);
+
+        $temp = &$this->config;
+        foreach($keys as $key) {
+            $temp = &$temp[$key];
+        }
+
+        $temp = $value;
+
+        unset($temp);
+
+        return $this;
     }
 
     /**

@@ -71,7 +71,7 @@ abstract class Application
         $this->container = new DIContainer($configuration);
 
         $this->configuration = is_null($configuration) ? new NullConfiguration() : $configuration;
-        $this->configuration->set('root-path', $this->getRootPath());
+        $this->configuration->set('application.root-path', $this->getRootPath());
 
 //        $this->eventDispatcher = new EventDispatcher();
 

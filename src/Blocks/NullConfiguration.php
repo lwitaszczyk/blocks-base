@@ -47,14 +47,14 @@ class NullConfiguration implements Configuration
     {
         $keys = explode('.', $key);
 
-        $ref = $this->config;
-        foreach ($keys as $key) {
-            if (!array_key_exists($key, $ref)) {
-                $ref[$key] = [];
-            }
-            $ref = $ref[$key];
+        $temp = &$this->config;
+        foreach($keys as $key) {
+            $temp = &$temp[$key];
         }
-        $ref[$key] = $value;
+
+        $temp = $value;
+
+        unset($temp);
 
         return $this;
     }
