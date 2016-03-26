@@ -2,9 +2,8 @@
 
 namespace Blocks\DI;
 
-class DIByTags extends Argument
+class DIByTag extends Argument
 {
-
     /**
      * {@inheritDoc}
      */
