@@ -1,8 +1,10 @@
 <?php
 
-namespace Blocks;
+namespace Blocks\Logger;
 
-class NullLogger implements Logger
+use Blocks\Logger;
+
+class StatelessLogger implements Logger
 {
     /**
      * {@inheritdoc}

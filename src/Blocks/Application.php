@@ -6,6 +6,7 @@ use Blocks\Cache\StatelessCache;
 use Blocks\DI\DIAsSingleton;
 use Blocks\DI\DIAsValue;
 use Blocks\DI\DIContainer;
+use Blocks\Logger\StatelessLogger;
 
 abstract class Application
 {
@@ -76,7 +77,7 @@ abstract class Application
 
         $this->container->addServices([
             (new DIAsValue(self::CONFIGURATION, $this->configuration)),
-            (new DIAsSingleton(self::LOGGER, NullLogger::class)),
+            (new DIAsSingleton(self::LOGGER, StatelessLogger::class)),
             (new DIAsValue(self::CONTAINER, $this->container)),
             (new DIAsValue(self::APPLICATION, $this)),
 //            (new DIAsValue(self::EVENT_DISPATCHER, $this->eventDispatcher)),
