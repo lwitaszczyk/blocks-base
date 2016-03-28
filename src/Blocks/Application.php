@@ -2,6 +2,7 @@
 
 namespace Blocks;
 
+use Blocks\Cache\StatelessCache;
 use Blocks\DI\DIAsSingleton;
 use Blocks\DI\DIAsValue;
 use Blocks\DI\DIContainer;
@@ -79,7 +80,7 @@ abstract class Application
             (new DIAsValue(self::CONTAINER, $this->container)),
             (new DIAsValue(self::APPLICATION, $this)),
 //            (new DIAsValue(self::EVENT_DISPATCHER, $this->eventDispatcher)),
-            (new DIAsSingleton(self::CACHE, NullCache::class)),
+            (new DIAsSingleton(self::CACHE, StatelessCache::class)),
         ]);
     }
 

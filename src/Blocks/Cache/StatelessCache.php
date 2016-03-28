@@ -1,8 +1,10 @@
 <?php
 
-namespace Blocks;
+namespace Blocks\Cache;
 
-class NullCache implements Cache
+use Blocks\Cache;
+
+class StatelessCache implements Cache
 {
 
     /**
