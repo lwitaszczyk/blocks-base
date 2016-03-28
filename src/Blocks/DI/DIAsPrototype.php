@@ -8,8 +8,8 @@ class DIAsPrototype extends DirectReference
     /**
      * {@inheritDoc}
      */
-    public function get()
+    public function get(DIContainer $container)
     {
-        return $this->createInstance();
+        return $this->createInstance($container);
     }
 }

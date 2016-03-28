@@ -107,10 +107,20 @@ class DIContainer
     }
 
     /**
+     * @deprecated
      * @param Service[] $services
      * @return $this
      */
     public function add(array $services = [])
+    {
+        return $this->addServices($services);
+    }
+
+    /**
+     * @param Service[] $services
+     * @return $this
+     */
+    public function addServices(array $services = [])
     {
         foreach ($services as $service) {
             $this->addService($service);
