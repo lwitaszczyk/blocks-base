@@ -1,8 +1,10 @@
 <?php
 
-namespace Blocks;
+namespace Blocks\Configuration;
 
-class NullConfiguration implements Configuration
+use Blocks\Configuration;
+
+class StatelessConfiguration implements Configuration
 {
 
     /**

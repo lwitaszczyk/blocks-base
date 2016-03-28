@@ -60,22 +60,20 @@ abstract class Application
      * Application constructor.
      * @param Configuration $configuration
      */
-    public function __construct(Configuration $configuration = null)
+    public function __construct(Configuration $configuration)
     {
         self::$instance = $this;
 
-        $this->rootPath = dirname(filter_input(INPUT_SERVER, 'SCRIPT_FILENAME'));
-
         $this->packages = [];
-
         $this->container = new DIContainer($configuration);
+        $this->configuration = $configuration;
 
-        $this->configuration = is_null($configuration) ? new NullConfiguration() : $configuration;
+        $this->rootPath = dirname(filter_input(INPUT_SERVER, 'SCRIPT_FILENAME'));
         $this->configuration->set('application.root-path', $this->getRootPath());
 
 //        $this->eventDispatcher = new EventDispatcher();
 
-        $this->container->add([
+        $this->container->addServices([
             (new DIAsValue(self::CONFIGURATION, $this->configuration)),
             (new DIAsSingleton(self::LOGGER, NullLogger::class)),
             (new DIAsValue(self::CONTAINER, $this->container)),
@@ -184,10 +182,10 @@ abstract class Application
 
     /**
      * @param \Exception $exception
-     * @return bool
+     * @throws \Exception
      */
     protected function onException(\Exception $exception)
     {
-        return false;
+        throw $exception;
     }
 }
