@@ -2,16 +2,10 @@
 
 namespace Blocks\Configuration;
 
-use Blocks\Configuration;
 use Symfony\Component\Yaml\Yaml;
 
-class YmlConfiguration implements Configuration
+class YmlConfiguration extends BaseConfiguration
 {
-
-    /**
-     * @var mixed[]
-     */
-    private $config;
 
     /**
      * YmlConfiguration constructor.
@@ -20,77 +14,14 @@ class YmlConfiguration implements Configuration
      */
     public function __construct($fileName)
     {
-        $this->config = [];
-
         if (file_exists($fileName)) {
-            $this->config = Yaml::parse(
+            $config = Yaml::parse(
                 file_get_contents($fileName)
             );
         } else {
             throw new \Exception(sprintf('Configuration file %s not exists', $fileName));
         }
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function get($key, $default = null)
-    {
-        $value = $this->config;
-
-        $keys = explode('.', $key);
-        $key = reset($keys);
-
-        do {
-            if (array_key_exists($key, $value)) {
-                $value = $value[$key];
-            } else {
-                return $default;
-            }
-            $key = next($keys);
-        } while ($key !== false);
-
-        return $value;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function set($key, $value)
-    {
-        $keys = explode('.', $key);
-
-        $temp = &$this->config;
-        foreach($keys as $key) {
-            $temp = &$temp[$key];
-        }
-
-        $temp = $value;
-
-        unset($temp);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function has($key)
-    {
-        $value = $this->config;
-
-        $keys = explode('.', $key);
-        $key = reset($keys);
-
-        do {
-            if (array_key_exists($key, $value)) {
-                $value = $value[$key];
-            } else {
-                return false;
-            }
-            $key = next($keys);
-        } while ($key !== false);
-
-        return true;
+        parent::__construct($config);
     }
 }

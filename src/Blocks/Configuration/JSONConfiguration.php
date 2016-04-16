@@ -2,15 +2,8 @@
 
 namespace Blocks\Configuration;
 
-use Blocks\Configuration;
-
-class JSONConfiguration implements Configuration
+class JSONConfiguration extends BaseConfiguration
 {
-
-    /**
-     * @var mixed[]
-     */
-    private $config;
 
     /**
      * JSONConfiguration constructor.
@@ -19,78 +12,15 @@ class JSONConfiguration implements Configuration
      */
     public function __construct($fileName)
     {
-        $this->config = [];
-
         if (file_exists($fileName)) {
-            $this->config = json_decode(
+            $config = json_decode(
                 file_get_contents($fileName),
                 true
             );
         } else {
             throw new \Exception(sprintf('Configuration file %s not exists', $fileName));
         }
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function get($key, $default = null)
-    {
-        $value = $this->config;
-
-        $keys = explode('.', $key);
-        $currentKey = reset($keys);
-
-        do {
-            if (array_key_exists($currentKey, $value)) {
-                $value = $value[$currentKey];
-            } else {
-                return $default;
-            }
-            $currentKey = next($keys);
-        } while ($currentKey !== false);
-
-        return $value;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function set($key, $value)
-    {
-        $keys = explode('.', $key);
-
-        $temp = &$this->config;
-        foreach($keys as $key) {
-            $temp = &$temp[$key];
-        }
-
-        $temp = $value;
-
-        unset($temp);
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function has($key)
-    {
-        $value = $this->config;
-
-        $keys = explode('.', $key);
-        $key = reset($keys);
-
-        do {
-            if (array_key_exists($key, $value)) {
-                $value = $value[$key];
-            } else {
-                return false;
-            }
-            $key = next($keys);
-        } while ($key !== false);
-
-        return true;
+        parent::__construct($config);
     }
 }

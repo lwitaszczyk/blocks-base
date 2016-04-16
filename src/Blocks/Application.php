@@ -2,21 +2,26 @@
 
 namespace Blocks;
 
+use Blocks\Cache;
 use Blocks\Cache\StatelessCache;
+use Blocks\Configuration;
 use Blocks\DI\DIAsSingleton;
 use Blocks\DI\DIAsValue;
 use Blocks\DI\DIContainer;
+use Blocks\Logger;
 use Blocks\Logger\StatelessLogger;
+use Doctrine\Common\Annotations\AnnotationReader;
 
 abstract class Application
 {
 
-    const APPLICATION = 'application';
-    const CONTAINER = 'container';
-    const CACHE = 'cache';
-    const EVENT_DISPATCHER = 'event-dispatcher';
-    const CONFIGURATION = 'configuration';
-    const LOGGER = 'logger';
+    const APPLICATION = Application::class;
+    const CONTAINER = DIContainer::class;
+    const CACHE = Cache::class;
+    const EVENT_DISPATCHER = Application::class . '-event-dispatcher';
+    const CONFIGURATION = Configuration::class;
+    const LOGGER = Logger::class;
+    const ANNOTATIONS_READER = Application::class . '-annotations_reader';
 
     private static $instance = null;
 
@@ -74,6 +79,7 @@ abstract class Application
         $this->configuration->set('application.root-path', $this->getRootPath());
 
 //        $this->eventDispatcher = new EventDispatcher();
+        $annotationsReader = new AnnotationReader();
 
         $this->container->addServices([
             (new DIAsValue(self::CONFIGURATION, $this->configuration)),
@@ -82,6 +88,7 @@ abstract class Application
             (new DIAsValue(self::APPLICATION, $this)),
 //            (new DIAsValue(self::EVENT_DISPATCHER, $this->eventDispatcher)),
             (new DIAsSingleton(self::CACHE, StatelessCache::class)),
+            (new DIAsValue(self::ANNOTATIONS_READER, $annotationsReader)),
         ]);
     }
 
