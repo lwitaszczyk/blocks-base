@@ -188,13 +188,4 @@ abstract class Application
 //        $this->eventDispatcher->dispatch($event, $this);
         return $this;
     }
-
-    /**
-     * @param \Exception $exception
-     * @throws \Exception
-     */
-    protected function onException(\Exception $exception)
-    {
-        throw $exception;
-    }
 }

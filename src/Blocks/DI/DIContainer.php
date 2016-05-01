@@ -107,6 +107,22 @@ class DIContainer
     }
 
     /**
+     * @param string $tag
+     * @return string[]
+     */
+    public function findIdsByTag($tag)
+    {
+        $tag = (string)$tag;
+        $services = [];
+        foreach ($this->services as $service) {
+            if ($service->hasTag($tag)) {
+                $services[] = $service->getId();
+            }
+        }
+        return $services;
+    }
+
+    /**
      * @deprecated
      * @param Service[] $services
      * @return $this
