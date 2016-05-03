@@ -25,7 +25,8 @@ trait AttributesTrait
     /**
      * @param array $attributes
      */
-    public function setAttributes(array $attributes = []) {
+    public function setAttributes(array $attributes = [])
+    {
         foreach ($attributes as $attributeName => $attributeValue) {
             $this->setAttribute($attributeName, $attributeValue);
         }

@@ -51,7 +51,7 @@ abstract class BaseConfiguration implements Configuration
         $keys = explode('.', $key);
 
         $temp = &$this->config;
-        foreach($keys as $key) {
+        foreach ($keys as $key) {
             $temp = &$temp[$key];
         }
 
