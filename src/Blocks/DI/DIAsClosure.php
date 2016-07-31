@@ -21,10 +21,11 @@ class DIAsClosure extends Service
     }
 
     /**
-     * @return mixed
+     * @inheritdoc
      */
-    public function get()
+    public function get(DIContainer $container)
     {
-        return $this->closure();
+        $c = $this->closure;
+        return $c();
     }
 }
