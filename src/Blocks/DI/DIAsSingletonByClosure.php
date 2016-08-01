@@ -2,13 +2,17 @@
 
 namespace Blocks\DI;
 
-class DIAsClosure extends Service
+class DIAsSingletonByClosure extends Service
 {
-
     /**
      * @var callable
      */
     private $closure;
+
+    /**
+     * @var mixed
+     */
+    private $reference;
 
     /**
      * @param string $id
@@ -18,6 +22,7 @@ class DIAsClosure extends Service
     {
         parent::__construct($id);
         $this->closure = $closure;
+        $this->reference = null;
     }
 
     /**
@@ -25,7 +30,10 @@ class DIAsClosure extends Service
      */
     public function get(DIContainer $container)
     {
-        $c = $this->closure;
-        return $c();
+        if (is_null($this->reference)) {
+            $closure = $this->closure;
+            $this->reference = $closure($container);
+        }
+        return $this->reference;
     }
 }
