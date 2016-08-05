@@ -4,7 +4,6 @@ namespace Blocks\DI;
 
 class DIAsValue extends Service
 {
-
     /**
      * @var mixed
      */

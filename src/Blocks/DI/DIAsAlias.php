@@ -4,7 +4,6 @@ namespace Blocks\DI;
 
 class DIAsAlias extends Service
 {
-
     /**
      * @var string
      */

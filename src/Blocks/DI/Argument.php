@@ -4,7 +4,6 @@ namespace Blocks\DI;
 
 abstract class Argument
 {
-
     /**
      * @var string
      */

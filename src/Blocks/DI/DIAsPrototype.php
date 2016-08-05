@@ -2,9 +2,8 @@
 
 namespace Blocks\DI;
 
-class DIAsPrototype extends DirectReference
+class DIAsPrototype extends Reference
 {
-
     /**
      * {@inheritDoc}
      */

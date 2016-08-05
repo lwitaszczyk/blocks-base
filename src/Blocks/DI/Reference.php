@@ -131,7 +131,7 @@ abstract class Reference extends Service
     /**
      * @return string
      */
-    protected function getClassName()
+    public function getClassName()
     {
         return $this->className;
     }
@@ -211,5 +211,18 @@ abstract class Reference extends Service
      * @param DIContainer $container
      * @return object
      */
-    abstract protected function factoryInstance(DIContainer $container);
+    /**
+     * @param DIContainer $container
+     * @return mixed
+     */
+    protected function factoryInstance(DIContainer $container)
+    {
+        $reflection = new \ReflectionClass($this->getClassName());
+        $instance = $reflection->newInstanceArgs(
+            $this->buildArguments($container)
+        );
+        $this->injectCalls($container, $reflection, $instance);
+        $this->injectProperties($container, $reflection, $instance);
+        return $instance;
+    }
 }

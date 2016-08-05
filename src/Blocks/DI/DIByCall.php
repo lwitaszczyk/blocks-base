@@ -4,7 +4,6 @@ namespace Blocks\DI;
 
 class DIByCall
 {
-
     /**
      * @var string
      */

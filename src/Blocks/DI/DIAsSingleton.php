@@ -2,7 +2,7 @@
 
 namespace Blocks\DI;
 
-class DIAsSingleton extends DirectReference
+class DIAsSingleton extends Reference
 {
 
     /**
