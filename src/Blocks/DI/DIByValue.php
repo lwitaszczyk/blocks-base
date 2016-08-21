@@ -22,7 +22,7 @@ class DIByValue extends Argument
     /**
      * {@inheritDoc}
      */
-    public function get()
+    public function get(DIContainer $container)
     {
         return $this->value;
     }
