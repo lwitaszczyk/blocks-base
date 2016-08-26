@@ -2,13 +2,12 @@
 
 namespace Blocks;
 
-use Blocks\Cache;
 use Blocks\Cache\StatelessCache;
-use Blocks\Configuration;
 use Blocks\DI\DIAsSingleton;
+use Blocks\DI\DIAsSingletonAsClass;
 use Blocks\DI\DIAsValue;
+use Blocks\DI\DIByService;
 use Blocks\DI\DIContainer;
-use Blocks\Logger;
 use Blocks\Logger\StatelessLogger;
 use Doctrine\Common\Annotations\AnnotationReader;
 
@@ -18,10 +17,10 @@ abstract class Application
     const APPLICATION = Application::class;
     const CONTAINER = DIContainer::class;
     const CACHE = Cache::class;
-    const EVENT_DISPATCHER = Application::class . '-event-dispatcher';
+//    const EVENT_DISPATCHER = Application::class . '-event-dispatcher';
     const CONFIGURATION = Configuration::class;
     const LOGGER = Logger::class;
-    const ANNOTATIONS_READER = Application::class . '-annotations_reader';
+    const ANNOTATIONS_READER = AnnotationReader::class;
 
     private static $instance = null;
 
@@ -89,6 +88,9 @@ abstract class Application
 //            (new DIAsValue(self::EVENT_DISPATCHER, $this->eventDispatcher)),
             (new DIAsSingleton(self::CACHE, StatelessCache::class)),
             (new DIAsValue(self::ANNOTATIONS_READER, $annotationsReader)),
+            (new DIAsSingletonAsClass(Invoker::class))->addArguments([
+                new DIByService(DIContainer::class)
+            ]),
         ]);
     }
 
